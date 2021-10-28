@@ -52,8 +52,10 @@ public class GodServiceImpl implements GodService {
 
     private GodModel updateDate(GodModel godNew, GodModel godOld) {
         godOld.setName(godNew.getName());
-        godOld.setExpertise(godNew.getExpertise());
+        godOld.setCulture(godNew.getCulture());
+        godOld.setRole(godNew.getRole());
         godOld.setStory(godNew.getStory());
+        godOld.setPantheon(godNew.getPantheon());
         return godOld;
     }
 }

@@ -13,7 +13,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-@Table(name = "Table_of_Gods")
+@Table(name = "Gods")
 public class GodModel implements Serializable {
 
     private static final long serialVersionUID = 50585560893586437L;
@@ -21,12 +21,22 @@ public class GodModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "Name", nullable = false)
     private String name;
-    private String expertise;
-    @Lob@Basic(fetch = FetchType.LAZY)
+    @Column(name = "Role", nullable = false)
+    private String role;
+    @Column(name = "Culture", nullable = false)
+    private String culture;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "Story", nullable = false)
+    @ToString.Exclude
     private String story;
-    //todo private Pantheon pantheon;
-    //todo HATEOS
+
+    @JoinColumn(name = "pantheon_ID")
+    @ManyToOne
+    @ToString.Exclude
+    private PantheonModel pantheon;
 
     @Override
     public boolean equals(Object o) {

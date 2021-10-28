@@ -31,7 +31,7 @@ public class SwaggerConfig {
     private ApiInfo metaInfo() {
         return new ApiInfo(
                 "API - Gods Database",
-                "Database with all the mythologies in the world",
+                "Database with All God of Age of Mythology",
                 "0.1",
                 "Terms of Services",
                 new Contact("Oséias Domingues","github.com/OseiasDomingues","oseiasdomingues9@gmail.com"),
