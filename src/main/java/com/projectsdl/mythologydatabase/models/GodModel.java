@@ -23,13 +23,11 @@ public class GodModel implements Serializable {
     private Long id;
     private String name;
     private String expertise;
+    @Lob@Basic(fetch = FetchType.LAZY)
     private String story;
     //todo private Pantheon pantheon;
-    //todo Swagger
     //todo HATEOS
     //todo API PUT - DELETE
-    //todo Exception
-    //todo validations
 
     @Override
     public boolean equals(Object o) {
