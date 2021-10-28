@@ -11,6 +11,7 @@ public interface GodMapper {
 
     GodMapper INSTANCE = Mappers.getMapper(GodMapper.class);
 
+    @Mapping(target = "id", ignore = true)
     GodModel toModel(GodDTO godDTO);
 
     GodDTO toDTO(GodModel godModel);

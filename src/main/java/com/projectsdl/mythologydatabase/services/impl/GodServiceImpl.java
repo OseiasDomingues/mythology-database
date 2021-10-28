@@ -3,6 +3,7 @@ package com.projectsdl.mythologydatabase.services.impl;
 import com.projectsdl.mythologydatabase.models.GodModel;
 import com.projectsdl.mythologydatabase.repositories.GodRepository;
 import com.projectsdl.mythologydatabase.services.GodService;
+import com.projectsdl.mythologydatabase.services.exceptions.ObjectNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class GodServiceImpl implements GodService {
 
     @Override
     public GodModel findById(Long id) {
-        return godRepository.findById(id).orElseThrow(NullPointerException::new);
+        return godRepository.findById(id).orElseThrow(() -> new ObjectNotFound(id));
     }
 
     @Override
