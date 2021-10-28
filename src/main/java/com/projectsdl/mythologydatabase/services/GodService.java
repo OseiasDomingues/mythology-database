@@ -9,4 +9,6 @@ public interface GodService {
     List<GodModel> findAll();
     GodModel findById(Long id);
     GodModel save(GodModel godModel);
+    void delete(Long id);
+    GodModel update(Long id, GodModel godModel);
 }

@@ -29,4 +29,25 @@ public class GodServiceImpl implements GodService {
     public GodModel save(GodModel godModel) {
         return godRepository.save(godModel);
     }
+
+    @Override
+    public void delete(Long id) {
+        godRepository.deleteById(id);
+    }
+
+    @Override
+    public GodModel update(Long id, GodModel godNew) {
+        GodModel godOld = godRepository.getById(id);
+        if (godOld == null) {
+            return null;
+        }
+        return save(updateDate(godNew, godOld));
+    }
+
+    private GodModel updateDate(GodModel godNew, GodModel godOld) {
+        godOld.setName(godNew.getName());
+        godOld.setExpertise(godNew.getExpertise());
+        godOld.setStory(godNew.getStory());
+        return godOld;
+    }
 }

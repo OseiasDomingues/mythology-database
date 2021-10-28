@@ -58,5 +58,18 @@ public class GodController {
         godService.save(newGod);
         return ResponseEntity.status(HttpStatus.CREATED).body(newGod);
     }
+    @DeleteMapping("/{id}")
+    @ApiOperation("Delete a god or goddess from the database")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        godService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    @PutMapping("/{id}")
+    @ApiOperation("Update a god or goddess from the database")
+    public ResponseEntity<GodModel> update(@PathVariable Long id, @RequestBody GodDTO godDTO){
+        GodModel godModel = godMapper.toModel(godDTO);
+        GodModel godUpdate = godService.update(id, godModel);
+        return ResponseEntity.status(HttpStatus.OK).body(godUpdate);
+    }
 
 }
