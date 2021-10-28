@@ -1,8 +1,8 @@
 package com.projectsdl.mythologydatabase.services.exceptions;
 
-public class ObjectNotFound extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException{
 
-    public ObjectNotFound(Long id) {
+    public ResourceNotFoundException(Long id) {
         super("ID " + id + " not found");
     }
 }

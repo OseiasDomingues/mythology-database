@@ -3,8 +3,11 @@ package com.projectsdl.mythologydatabase.services.impl;
 import com.projectsdl.mythologydatabase.models.GodModel;
 import com.projectsdl.mythologydatabase.repositories.GodRepository;
 import com.projectsdl.mythologydatabase.services.GodService;
-import com.projectsdl.mythologydatabase.services.exceptions.ObjectNotFound;
+import com.projectsdl.mythologydatabase.services.exceptions.DatabaseException;
+import com.projectsdl.mythologydatabase.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +25,7 @@ public class GodServiceImpl implements GodService {
 
     @Override
     public GodModel findById(Long id) {
-        return godRepository.findById(id).orElseThrow(() -> new ObjectNotFound(id));
+        return godRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @Override
@@ -32,15 +35,18 @@ public class GodServiceImpl implements GodService {
 
     @Override
     public void delete(Long id) {
+        try{
         godRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     @Override
     public GodModel update(Long id, GodModel godNew) {
-        GodModel godOld = godRepository.getById(id);
-        if (godOld == null) {
-            return null;
-        }
+        GodModel godOld = godRepository.findById(id).orElseThrow(()->new ResourceNotFoundException(id));
         return save(updateDate(godNew, godOld));
     }
 

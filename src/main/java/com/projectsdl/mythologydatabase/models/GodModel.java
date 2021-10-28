@@ -27,7 +27,6 @@ public class GodModel implements Serializable {
     private String story;
     //todo private Pantheon pantheon;
     //todo HATEOS
-    //todo API PUT - DELETE
 
     @Override
     public boolean equals(Object o) {
